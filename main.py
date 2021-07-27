@@ -31,7 +31,7 @@ def calculate(vals, sign):
         "+": lambda x: sum(x[:-1]) - x[-1],
         "-": lambda x: x[0] - sum(x[1:-1]) - x[-1],
         # "x" : ,
-        # "both" :
+        # "both" : lambda x:
     }
     return calculator.get(sign)(vals) if calculator.get(sign) != None else 0
 
