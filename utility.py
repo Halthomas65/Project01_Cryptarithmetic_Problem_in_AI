@@ -8,7 +8,13 @@ def num_to_string(number, digit_assign):
         number = number.replace(digit, digit_assign[digit])
     return number
 
-
+# max_testcase: số lượng testcase
+# max_letter: số lượng kí tự tối đa trong từ
+# max_word: số lượng từ tối đa trong testcase
+# sign: gồm '+' cho test chỉ toàn phép cộng cho level 1 và 2, 
+# '-' cho test chỉ toàn phép trừ cho level 1 và 2, 
+# '*' cho test chỉ toàn phép nhân cho level 4, 
+# 'both' cho test gồm cả phép cộng và trừ và có cả dấu ngoặc cho level 3
 def generate_testcase(max_testcase, max_letter, max_word, sign):
     tc = ''
     for i in range(max_testcase):
@@ -131,4 +137,5 @@ def read_input():
 
 
 if __name__ == '__main__':
-    generate_testcase(15, 4, 7, 'both')
+    generate_testcase(5, 4, 7, 'both')
+    print(read_input())
