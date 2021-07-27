@@ -2,7 +2,6 @@ from utility import read_input, generate_testcase
 import random
 import time
 import math
-import numpy
 
 
 def first_solution(words, first_letters):
@@ -27,7 +26,11 @@ def letter_value(letter, solution):
 
 def calculate(vals, signs):
     if signs[1] == '*':
-        return numpy.prod(vals[:-1]) - vals[-1]
+        left = 1
+        right = vals[-1]
+        for i in range(len(vals) - 1):
+            left *= vals[i]
+        return left - right
     signs = list(map(lambda sign: 1 if sign == '+' else -
                  1 if sign == '-' else 1, signs))
     sign_vals = [signs[i] * vals[i] for i in range(len(vals))]
