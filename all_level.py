@@ -58,9 +58,9 @@ def other_solution(solution, first_letters):
 def get_solution(solution, words):
     vals = [str(word_value(word, solution)) for word in words]
     # return ("%s = %s" % (' '.join(vals[:-1]), vals[-1]))
-    # return ("%s = %s" % (' '.join(vals[:-1]), vals[-1])) + '\n' + ''.join(sorted(list(set(''.join(words))))) + '\n' + str(word_value(sorted(list(set(''.join(words)))), solution))
+    return ("%s = %s" % (' '.join(vals[:-1]), vals[-1])) + '\n' + ''.join(sorted(list(set(''.join(words))))) + '\n' + str(word_value(sorted(list(set(''.join(words)))), solution))
     # return ''.join(sorted(list(set(''.join(words))))) + '\n' + str(word_value(sorted(list(set(''.join(words)))), solution))
-    return str(word_value(sorted(list(set(''.join(words)))), solution))
+    # return str(word_value(sorted(list(set(''.join(words)))), solution))
 
 
 def solve_utl(try_time, max_time, duration, words, signs):
@@ -99,6 +99,5 @@ def solve(words, signs):
 
 
 if __name__ == '__main__':
-    # generate_testcase(3, 4, '+')
     for inp in read_input():
         solve(*inp)
