@@ -43,7 +43,11 @@ def generate_testcase(max_testcase, max_letter, max_word, sign):
                     signs.append('-')
                     right -= numbers[i]
             numbers.append(right)
-        numbers = list(map(lambda x: str(x), numbers))
+            if right >= 0:
+                signs.append('+')
+            else:
+                signs.append('-')
+        numbers = list(map(lambda x: str(abs(x)), numbers))
         digits = set(''.join(numbers))
         digit_assign = {}
         letter_assign = {}
@@ -83,7 +87,7 @@ def generate_testcase(max_testcase, max_letter, max_word, sign):
                 for i in range(open_pos + 1, close_pos):
                     t += signs[i] + numbers[i]
                 t += signs[close_pos] + numbers[close_pos] + ')'
-            t += '=' + numbers[-1]
+            t += '=' + (signs[-1] if signs[-1] == '-' else '') + numbers[-1]
             tc += t + '\n'
     open('input.txt', 'w').write(tc[:-1])
 
@@ -98,12 +102,7 @@ def read_input():
         is_sign_change = False
         signs = []
         inp = []
-        first_sign = line[0]
-        if first_sign == '(':
-            first_sign = line[1]
-        if first_sign == '-':
-            signs.append(first_sign)
-        else:
+        if (line[0] in string.ascii_letters or line[0] == '(') and line[1] in string.ascii_letters:
             signs.append('+')
         for i in range(len(line)):
             c = line[i]
@@ -131,4 +130,6 @@ def read_input():
 
 
 if __name__ == '__main__':
-    generate_testcase(15, 4, 7, 'both')
+    generate_testcase(5, 3, 5, 'both')
+    for inp in read_input():
+        print(inp)
