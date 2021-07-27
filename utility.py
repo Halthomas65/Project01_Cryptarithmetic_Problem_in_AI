@@ -43,12 +43,46 @@ def generate_testcase(mi, ma, sign):
 
 
 def read_input():
-    raw_inputs = open('input.txt', 'r').read().split('\n')
-    signs = set({'+', '-', 'x'})
-    inputs = []
-    for line in raw_inputs:
-        i = 0
-        while line[i] not in signs:
-            i += 1
-        inputs.append((re.split(r'[-+=]', line), line[i]))
-    return inputs
+    raw_inps = open('input.txt', 'r').read().split('\n')
+    symbols = set({'+', '-', '*', '=', ')', '('})
+    inps = []
+    for line in raw_inps:
+        pre_sign_pos = -1
+        cur_sign_pos = 0
+        is_sign_change = False
+        signs = []
+        inp = []
+        first_sign = line[0]
+        if first_sign == '(':
+            first_sign = line[1]
+        if first_sign == '-':
+            signs.append(first_sign)
+        else:
+            signs.append('+')
+        for i in range(len(line)):
+            c = line[i]
+            if c == '(' and i > 0 and line[i - 1] == '-':
+                is_sign_change = True
+            elif c == ')':
+                is_sign_change = False
+            if c in symbols:
+                cur_sign_pos = i
+                if pre_sign_pos + 1 < cur_sign_pos:
+                    inp.append(line[pre_sign_pos + 1: cur_sign_pos])
+                pre_sign_pos = cur_sign_pos
+                if c != '=' and c != '(' and c != ')':
+                    sign = c
+                    if is_sign_change and c != '*':
+                        sign = '-' if c == '+' else '+'
+                    signs.append(sign)
+        if line[pre_sign_pos] != '=':
+            signs.append(line[pre_sign_pos])
+        else:
+            signs.append('+')
+        inp.append(line[pre_sign_pos + 1:])
+        inps.append((inp, signs))
+    return inps
+
+
+if __name__ == '__main__':
+    print(read_input())
