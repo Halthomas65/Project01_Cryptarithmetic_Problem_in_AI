@@ -85,7 +85,7 @@ def solve_utl(try_time, max_time, duration, words, signs):
 
 
 def solve(words, signs):
-    max_time = 300
+    max_time = 600
     duration = 30
     max_each_time = int(max_time / duration)
     cnt = 0

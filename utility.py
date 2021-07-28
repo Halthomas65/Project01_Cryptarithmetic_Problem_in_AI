@@ -1,6 +1,7 @@
 import random
 import string
 import re
+import argparse
 
 
 def num_to_string(number, digit_assign):
@@ -11,10 +12,12 @@ def num_to_string(number, digit_assign):
 # max_testcase: số lượng testcase
 # max_letter: số lượng kí tự tối đa trong từ
 # max_word: số lượng từ tối đa trong testcase
-# sign: gồm '+' cho test chỉ toàn phép cộng cho level 1 và 2, 
-# '-' cho test chỉ toàn phép trừ cho level 1 và 2, 
-# '*' cho test chỉ toàn phép nhân cho level 4, 
+# sign: gồm '+' cho test chỉ toàn phép cộng cho level 1 và 2,
+# '-' cho test chỉ toàn phép trừ cho level 1 và 2,
+# '*' cho test chỉ toàn phép nhân cho level 4,
 # 'both' cho test gồm cả phép cộng và trừ và có cả dấu ngoặc cho level 3
+
+
 def generate_testcase(max_testcase, max_letter, max_word, sign):
     tc = ''
     for i in range(max_testcase):
@@ -95,7 +98,7 @@ def generate_testcase(max_testcase, max_letter, max_word, sign):
                 t += signs[close_pos] + numbers[close_pos] + ')'
             t += '=' + (signs[-1] if signs[-1] == '-' else '') + numbers[-1]
             tc += t + '\n'
-    open('input.txt', 'w').write(tc[:-1])
+    return tc[:-1]
 
 
 def read_input():
@@ -126,9 +129,7 @@ def read_input():
                     if is_sign_change and c != '*':
                         sign = '-' if c == '+' else '+'
                     signs.append(sign)
-        if line[pre_sign_pos] != '=':
-            signs.append(line[pre_sign_pos])
-        else:
+        if line[pre_sign_pos] == '=':
             signs.append('+')
         inp.append(line[pre_sign_pos + 1:])
         inps.append((inp, signs))
@@ -136,5 +137,16 @@ def read_input():
 
 
 if __name__ == '__main__':
-    generate_testcase(5, 4, 7, 'both')
-    print(read_input())
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-r', '--range', type=str, help='range', default='3,5')
+    args = parser.parse_args()
+    opers = ['+', '-', 'both', '*']
+    rge = list(map(lambda x: int(x), args.range.split(',')))
+    rge[0] = 3 if rge[0] < 3 else rge[0]
+    rge[1] = 4 if rge[1] < 4 else rge[1]
+    all_tc = []
+    for oper in opers:
+        all_tc.append(generate_testcase(random.randint(
+            *rge), random.randint(*rge), random.randint(*rge), oper))
+    open('input.txt', 'w').write('\n'.join(all_tc))
+    # print(read_input())
