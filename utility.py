@@ -9,6 +9,7 @@ def num_to_string(number, digit_assign):
         number = number.replace(digit, digit_assign[digit])
     return number
 
+# tạo testcase vào file intofile
 # max_testcase: số lượng testcase
 # max_letter: số lượng kí tự tối đa trong từ
 # max_word: số lượng từ tối đa trong testcase
@@ -101,8 +102,8 @@ def generate_testcase(max_testcase, max_letter, max_word, sign):
     return tc[:-1]
 
 
-def read_input():
-    raw_inps = open('input.txt', 'r').read().split('\n')
+def read_input(filename='input.txt'):
+    raw_inps = open(filename, 'r').read().strip().split('\n')
     symbols = set({'+', '-', '*', '=', ')', '('})
     inps = []
     for line in raw_inps:
@@ -148,5 +149,7 @@ if __name__ == '__main__':
     for oper in opers:
         all_tc.append(generate_testcase(random.randint(
             *rge), random.randint(*rge), random.randint(*rge), oper))
-    open('input.txt', 'w').write('\n'.join(all_tc))
+
+    into_file = 'input.txt'
+    open(into_file, 'w').write('\n'.join(all_tc))
     # print(read_input())

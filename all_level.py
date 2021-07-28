@@ -99,5 +99,5 @@ def solve(words, signs):
 
 
 if __name__ == '__main__':
-    for inp in read_input():
+    for inp in read_input('input.txt'):
         solve(*inp)
