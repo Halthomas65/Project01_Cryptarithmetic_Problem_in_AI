@@ -9,24 +9,21 @@ def num_to_string(number, digit_assign):
         number = number.replace(digit, digit_assign[digit])
     return number
 
-# tạo testcase vào file intofile
-# max_testcase: số lượng testcase
-# max_letter: số lượng kí tự tối đa trong từ
-# max_word: số lượng từ tối đa trong testcase
-# sign: gồm '+' cho test chỉ toàn phép cộng cho level 1 và 2,
-# '-' cho test chỉ toàn phép trừ cho level 1 và 2,
-# '*' cho test chỉ toàn phép nhân cho level 4,
-# 'both' cho test gồm cả phép cộng và trừ và có cả dấu ngoặc cho level 3
+# create testcases into 'into_file' file
+# max_testcase: numbers testcase
+# max_letter: maximum number of letter per word
+# max_word: maximum number of word per testcase
+# sign: '+'/'-' for testcase just include plus/subtract for level 1 and 2
+#       'both' for testcase include both plus, subtract, bracket for level 3
+#       '*' for testcase just include multipy for level 4,
 
 
 def generate_testcase(max_testcase, max_letter, max_word, sign):
     tc = ''
     for i in range(max_testcase):
-        # tong so tu
         word_size = random.randint(3, max_word)
         numbers = []
         for j in range(word_size - 1):
-            # so chu cai moi tu
             letter_size = random.randint(3, max_letter)
             numbers.append(random.randint(
                 10 ** (letter_size - 1), 10 ** letter_size - 1))
@@ -152,4 +149,3 @@ if __name__ == '__main__':
 
     into_file = 'input.txt'
     open(into_file, 'w').write('\n'.join(all_tc))
-    # print(read_input())
