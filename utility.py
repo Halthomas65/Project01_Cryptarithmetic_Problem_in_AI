@@ -24,13 +24,13 @@ def generate_testcase(max_testcase, max_letter, max_word, sign):
         word_size = random.randint(3, max_word)
         numbers = []
         for j in range(word_size - 1):
-            letter_size = random.randint(3, max_letter)
+            letter_size = random.randint(1, max_letter)
             numbers.append(random.randint(
                 10 ** (letter_size - 1), 10 ** letter_size - 1))
         if sign == '+':
             numbers.append(sum(numbers))
         elif sign == '-':
-            letter_size = random.randint(3, max_letter)
+            letter_size = random.randint(1, max_letter)
             numbers.append(random.randint(
                 10 ** (letter_size - 1), 10 ** letter_size - 1))
             numbers[0] = sum(numbers[1:])
@@ -140,12 +140,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
     opers = ['+', '-', 'both', '*']
     rge = list(map(lambda x: int(x), args.range.split(',')))
-    rge[0] = 3 if rge[0] < 3 else rge[0]
-    rge[1] = 4 if rge[1] < 4 else rge[1]
+    rge[0] = 2 if rge[0] < 2 else rge[0]
+    rge[1] = 3 if rge[1] < 3 else rge[1]
+    word_rge = [rge[0], rge[1]]
+    word_rge[0] = 4 if word_rge[0] < 4 else word_rge[0]
+    word_rge[1] = 5 if word_rge[1] < 5 else word_rge[1]
     all_tc = []
     for oper in opers:
         all_tc.append(generate_testcase(random.randint(
-            *rge), random.randint(*rge), random.randint(*rge), oper))
+            *rge), random.randint(*rge), random.randint(*word_rge), oper))
 
     into_file = 'input.txt'
     open(into_file, 'w').write('\n'.join(all_tc))
