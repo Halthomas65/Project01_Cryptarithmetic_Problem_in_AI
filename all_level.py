@@ -132,9 +132,9 @@ def solve_utl(try_time, max_time, duration, words, signs):
 def solve(words, signs):
     # default parameters
     # 10 minutes
-    max_time = 600
+    max_time = 300
     # 60 seconds each solve_utl
-    duration = 60
+    duration = 30
     # 20 times
     max_each_time = int(max_time / duration)
     # default above parameters when large number of letter in word

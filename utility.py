@@ -109,7 +109,7 @@ def read_input(filename='input.txt'):
         is_sign_change = False
         signs = []
         inp = []
-        if (line[0] in string.ascii_letters or line[0] == '(') and line[1] in string.ascii_letters:
+        if (line[0] in string.ascii_letters or line[0] == '(') and (line[1] in string.ascii_letters or line[1] in symbols):
             signs.append('+')
         for i in range(len(line)):
             c = line[i]
