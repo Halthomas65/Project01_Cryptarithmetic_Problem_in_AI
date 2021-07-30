@@ -133,8 +133,8 @@ def solve(words, signs):
     # default parameters
     # 10 minutes
     max_time = 600
-    # 30 seconds each solve_utl
-    duration = 30
+    # 60 seconds each solve_utl
+    duration = 60
     # 20 times
     max_each_time = int(max_time / duration)
     # default above parameters when large number of letter in word
