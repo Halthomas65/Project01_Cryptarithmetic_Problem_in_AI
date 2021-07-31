@@ -146,10 +146,12 @@ def solve(words, signs):
         duration = math.ceil(average)
         max_each_time = math.ceil(max_time / duration)
     # try_time starts at 1
-    print(solve_utl(1, max_each_time, duration, words, signs))
+    open('output.txt', 'a').write(
+        solve_utl(1, max_each_time, duration, words, signs) + '\n')
 
 
 if __name__ == '__main__':
+    open('output.txt', 'w').write('')
     # for each testcase
     for inp in read_input('input.txt'):
         # solve it
